@@ -29,32 +29,49 @@ fi
 echo "[brew] installing formulas"
 brew install \
   awscli \
-  colordiff \
-  coreutils \
-  curl \
   docker-buildx \
-  gawk \
-  gettext \
   gh \
   git \
-  gmp \
-  gnupg \
   jq \
   kube-linter \
   libyaml \
   mysql \
   neofetch \
   neovim \
-  readline \
   redis \
-  shellcheck \
   yq
 
+echo "[brew] installing gnu related formulas"
+brew install \
+  coreutils \
+  diffutils \
+  ed \
+  findutils \
+  gawk \
+  gettext \
+  gmp \
+  gnupg \
+  gnutils \
+  gnu-getopt \
+  gnu-indent \
+  gnu-tar \
+  gnu-sed \
+  gnu-which \
+  grep \
+  gzip \
+  wget
+
 echo "[brew] installing casks"
+brew install cask
 brew install --cask \
   docker \
-  insomnia \
+  google-chrome \
+  google-cloud-sdk \
+  iterm2 \
+  notion \
   openlens \
-  rq \
+  postman \
   raycast \
-  sequel-ace
+  sequel-ace \
+  slack \
+  visual-studio-code
