@@ -21,6 +21,7 @@ if [ $PLATFORM == "Linux" ]; then
 elif [ $PLATFORM == "Darwin" ]; then
   run "macos/setup-zsh.sh"
   run "macos/setup-brew.sh"
+  run "macos/setup-vim.sh"
   run "macos/setup-asdf.sh"
   run "macos/setup-git.sh"
 else
