@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+abort () {
+  echo "$@"
+  exit 1
+}
+
 run () {
   local script=$1
 
@@ -10,8 +15,7 @@ run () {
   if [ $? -eq 0 ] ; then
     echo "✅ [$script] completed"
   else
-    echo "❗ [$script] failed"
-    exit 1
+    abort "❗ [$script] failed"
   fi
 }
 
@@ -25,8 +29,7 @@ elif [ $PLATFORM == "Darwin" ]; then
   run "macos/setup-asdf.sh"
   run "macos/setup-git.sh"
 else
-  echo "❌ Current platform not allowed!"
-  exit 1
+  abort "❌ Current platform not allowed!"
 fi
 
 echo "🎉 Completed! 🎉"

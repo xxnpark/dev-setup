@@ -1,17 +1,34 @@
 #!/usr/bin/env bash
 set -eu
 
-echo "[vim] set EDITOR env to nvim"
-cat <<EOF >> "$HOME/.zshrc"
+abort () {
+  echo "$@"
+  exit 1
+}
+
+if type nvim &>/dev/null; then
+  echo "[vim] Neovim found at $(which nvim)"
+else
+  abort "[vim] Neovim not found!"
+fi
+
+ZSHRC_PATH="$HOME/.zshrc"
+echo "[vim] setting environment variable EDITOR to nvim in zshrc at $ZSHRC_PATH"
+cat <<EOF >> "$ZSHRC_PATH"
 
 # nvim
 export EDITOR='nvim'
 EOF
 
-echo "[vim] install spacevim"
-curl -sLf https://spacevim.org/install.sh | bash
+SPACEVIM_PATH="$HOME/.SpaceVim"
+if [[ -d "$SPACEVIM_PATH" ]]; then
+  echo "[vim] SpaceVim found at $SPACEVIM_PATH"
+else
+  echo "[vim] install SpaceVim"
+  curl -sLf https://spacevim.org/install.sh | bash
+fi
 
-echo "[vim] configure spacevim settings"
+echo "[vim] configure SpaceVim settings"
 cat <<EOF > "$HOME/.SpaceVim.d/init.toml"
 # All SpaceVim options are below [options] snippet
 [options]

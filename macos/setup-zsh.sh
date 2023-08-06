@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 set -eu
 
+abort () {
+  echo "$@"
+  exit 1
+}
+
 if type zinit &>/dev/null; then
-  echo "[zsh] zinit found: $(which zinit)"
-  if [ -d "${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git" ]; then
-    echo "[zsh] zinit not installed correctly!"
-    exit 1
+  echo "[zsh] zinit found at $(which zinit)"
+  if [[ ! -d "${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git" ]]; then
+    abort "[zsh] zinit not installed correctly!"
   fi
 else
   echo "[zsh] installing zinit"
@@ -15,7 +19,7 @@ fi
 
 ZSHRC_PATH="$HOME/.zshrc"
 
-echo "[zsh] adding zinit plugins"
+echo "[zsh] adding zinit plugins to zshrc at $ZSHRC_PATH"
 cat <<EOF >> "$ZSHRC_PATH"
 
 # Zinit Plugins
@@ -30,7 +34,7 @@ zinit light simnalamburt/zsh-expand-all
 alias git_current_branch='git rev-parse --abbrev-ref HEAD'
 EOF
 
-echo "[zsh] setting prompt colors"
+echo "[zsh] setting prompt colors in zshrc at $ZSHRC_PATH"
 cat <<'EOF' >> "$ZSHRC_PATH"
 
 # Prompt Context

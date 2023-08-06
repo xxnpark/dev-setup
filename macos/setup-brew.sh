@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 set -eu
 
+abort () {
+  echo "$@"
+  exit 1
+}
+
 if type brew &>/dev/null; then
-  echo "[brew] found at path $(which brew)"
+  echo "[brew] Homebrew found at $(which brew)"
   if [[ -z "${HOMEBREW_PREFIX:-}" ]]; then
-    echo "[brew] \$HOMEBREW_PREFIX is missing; broken homebrew found!"
-    exit 1
+    abort "[brew] \$HOMEBREW_PREFIX is missing; broken Homebrew found!"
   fi
 else
   echo "[brew] installing"
@@ -16,8 +20,7 @@ else
   elif [[ -d /usr/local/bin/brew ]]; then
     HOMEBREW_PREFIX=$(/usr/local/bin/brew --prefix)
   else
-    echo "[brew] could not find brew!"
-    exit 1
+    abort "[brew] Homebrew not found!"
   fi
 
   ZPROFILE_PATH="$HOME/.zprofile"

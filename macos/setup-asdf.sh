@@ -4,6 +4,8 @@ set -eu
 ASDF_DATA_DIR="$HOME/.asdf"
 ASDF_PATH="$ASDF_DATA_DIR/bin/asdf"
 
+ZSHRC_PATH="$HOME/.zshrc"
+
 if [ -d "$ASDF_DATA_DIR" ]; then
   echo "[asdf] found; updating"
   "$ASDF_PATH" update
@@ -11,12 +13,10 @@ else
   echo "[asdf] installing"
   git clone https://github.com/asdf-vm/asdf.git "$ASDF_DATA_DIR" --branch v0.12.0
 
-  ZSHRC_PATH="$HOME/.zshrc"
   echo "[asdf] adding asdf config to zshrc at $ZSHRC_PATH"
   cat <<'EOF' >> "$HOME/.zshrc"
 
 # asdf
-
 . "$HOME/.asdf/asdf.sh"
 EOF
 fi
@@ -30,7 +30,6 @@ asdf_plugin_add () {
     if [ $name == "java" ]; then
       "$ASDF_PATH" plugin add java https://github.com/halcyon/asdf-java.git
 
-      ZSHRC_PATH="$HOME/.zshrc"
       echo "[asdf] adding java config to zshrc at $ZSHRC_PATH"
       cat <<'EOF' >> ZSHRC_PATH
 
