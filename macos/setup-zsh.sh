@@ -25,6 +25,9 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light simnalamburt/zsh-expand-all
+
+# git
+alias git_current_branch='git rev-parse --abbrev-ref HEAD'
 EOF
 
 echo "[zsh] setting prompt colors"
