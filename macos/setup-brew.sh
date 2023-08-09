@@ -10,6 +10,11 @@ if type brew &>/dev/null; then
   echo "[brew] Homebrew found at $(which brew)"
   if [[ -z "${HOMEBREW_PREFIX:-}" ]]; then
     abort "[brew] \$HOMEBREW_PREFIX is missing; broken Homebrew found!"
+  else
+    echo "[brew] update Homebrew & upgrade already installed formulae"
+    brew update
+    brew upgrade
+    brew cleanup
   fi
 else
   echo "[brew] installing"
@@ -29,19 +34,20 @@ else
   eval "$("${HOMEBREW_PREFIX}"/bin/brew shellenv)"
 fi
 
-echo "[brew] installing formulas"
+echo "[brew] installing formulae"
 brew install \
   awscli \
   docker-buildx \
   gh \
   git \
+  git-lfs \
+  htop \
   jq \
   kube-linter \
   libyaml \
-  mysql \
   neofetch \
   neovim \
-  redis \
+  tree \
   yq
 
 echo "[brew] installing gnu related formulas"
@@ -67,14 +73,19 @@ brew install \
 echo "[brew] installing casks"
 brew install cask
 brew install --cask \
+  1password \
+  authy \
   docker \
+  firefox \
   google-chrome \
   google-cloud-sdk \
   iterm2 \
+  mactex \
   notion \
   openlens \
   postman \
   raycast \
   sequel-ace \
   slack \
+  typora \
   visual-studio-code
