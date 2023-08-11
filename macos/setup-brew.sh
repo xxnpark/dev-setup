@@ -80,6 +80,7 @@ brew install --cask \
   google-chrome \
   google-cloud-sdk \
   iterm2 \
+  jetbrains-toolbox \
   mactex \
   notion \
   openlens \
